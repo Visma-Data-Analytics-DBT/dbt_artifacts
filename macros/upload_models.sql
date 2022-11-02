@@ -69,8 +69,8 @@
                     '{{ model.checksum.checksum }}', {# checksum #}
                     '{{ model.config.materialized }}', {# materialization #}
                     {{ tojson(model.tags) }}, {# tags #}
-                    parse_json('{{ tojson(model.config.meta | replace('''', '''''')) }}'), {# meta #}
-                    '{{ model.alias }}' {# alias #}
+                    parse_json('{{ tojson(model.config.meta) | replace("'","\\'") }}'), {# meta #}
+                    '{{ model.config.alias }}' {# alias #}
                 )
                 {%- if not loop.last %},{%- endif %}
             {%- endfor %}
