@@ -40,7 +40,7 @@
                 '{{ model.checksum.checksum }}', {# checksum #}
                 '{{ model.config.materialized }}', {# materialization #}
                 '{{ tojson(model.tags) }}', {# tags #}
-                '', {# meta #}
+                '{{ tojson(model.config.meta) }}', {# meta #}
                 '{{ model.alias }}' {# alias #}
             )
             {%- if not loop.last %},{%- endif %}
@@ -69,7 +69,7 @@
                     '{{ model.checksum.checksum }}', {# checksum #}
                     '{{ model.config.materialized }}', {# materialization #}
                     {{ tojson(model.tags) }}, {# tags #}
-                    '', {# meta #}
+                    parse_json('{{ tojson(model.config.meta | replace('''', '''''')) }}'), {# meta #}
                     '{{ model.alias }}' {# alias #}
                 )
                 {%- if not loop.last %},{%- endif %}
