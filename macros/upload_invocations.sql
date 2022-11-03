@@ -97,7 +97,7 @@
             {% for env_variable in var('env_vars') %}
                 {% do env_vars_dict.update({env_variable: env_var(env_variable)}) %}
             {% endfor %}
-            parse_json('{{ tojson(env_vars_dict) }}'), {# env_vars #}
+            parse_json('{{ tojson(env_vars_dict) | replace('\\', '\\\\') | replace("'","\\'") }}'), {# env_vars #}
         {% else %}
             null, {# env_vars #}
         {% endif %}
@@ -107,13 +107,13 @@
             {% for dbt_var in var('dbt_vars') %}
                 {% do dbt_vars_dict.update({dbt_var: var(dbt_var)}) %}
             {% endfor %}
-            parse_json('{{ tojson(dbt_vars_dict) }}'), {# dbt_vars #}
+            parse_json('{{ tojson(dbt_vars_dict) | replace('\\', '\\\\') | replace("'","\\'") }}'), {# dbt_vars #}
         {% else %}
             null, {# dbt_vars #}
         {% endif %}
 
-        parse_json('{{ tojson(invocation_args_dict) }}'), {# invocation_args #}
-        parse_json('{{ tojson(dbt_metadata_envs) }}') {# dbt_custom_envs #}
+        parse_json('{{ tojson(invocation_args_dict) | replace('\\', '\\\\') | replace("'","\\'") }}'), {# invocation_args #}
+        parse_json('{{ tojson(dbt_metadata_envs) | replace('\\', '\\\\') | replace("'","\\'") }}') {# dbt_custom_envs #}
 
         )
     {% endset %}
