@@ -7,7 +7,7 @@ The package currently supports
 
 - Databricks :white_check_mark:
 - Spark :white_check_mark:
-- Snowflake adapters :white_check_mark:
+- Snowflake :white_check_mark:
 - Google BigQuery :white_check_mark:
 
 Models included:
@@ -35,7 +35,7 @@ See the generated [dbt docs site](https://brooklyn-data.github.io/dbt_artifacts/
 ```
 packages:
   - package: brooklyn-data/dbt_artifacts
-    version: 2.2.0
+    version: 2.2.2
 ```
 
 2. Run `dbt deps` to install the package
